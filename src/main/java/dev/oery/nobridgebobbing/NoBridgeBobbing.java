@@ -1,6 +1,10 @@
-package org.polyfrost.example;
+package dev.oery.nobridgebobbing;
 
-import org.polyfrost.example.config.NBBConfig;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
+import dev.oery.nobridgebobbing.config.NBBConfig;
 import cc.polyfrost.oneconfig.events.event.InitializationEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -16,14 +20,20 @@ public class NoBridgeBobbing {
     public static final String MODID = "@ID@";
     public static final String NAME = "@NAME@";
     public static final String VERSION = "@VER@";
-    // Sets the variables from `gradle.properties`. See the `blossom` config in `build.gradle.kts`.
     @Mod.Instance(MODID)
-    public static NoBridgeBobbing INSTANCE; // Adds the instance of the mod, so we can access other variables.
+    public static NoBridgeBobbing INSTANCE;
     public static NBBConfig config;
-
-    // Register the config and commands.
+    public Minecraft mc = Minecraft.getMinecraft();
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         config = new NBBConfig();
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent.PlayerTickEvent event) {
+        if (this.config.enabled && this.mc.thePlayer != null) {
+            this.mc.gameSettings.viewBobbing = this.mc.thePlayer.getLookVec().yCoord > -0.95F;
+        }
     }
 }
