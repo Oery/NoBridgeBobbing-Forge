@@ -15,7 +15,7 @@ import cc.polyfrost.oneconfig.config.data.OptionSize;
  * The main Config entrypoint that extends the Config type and inits the config options.
  * See <a href="https://docs.polyfrost.cc/oneconfig/config/adding-options">this link</a> for more config Options
  */
-public class TestConfig extends Config {
+public class NBBConfig extends Config {
     @HUD(
             name = "Example HUD"
     )
@@ -40,7 +40,7 @@ public class TestConfig extends Config {
     )
     public static int exampleDropdown = 1; // Default option (in this case "Option 2")
 
-    public TestConfig() {
+    public NBBConfig() {
         super(new Mod(ExampleMod.NAME, ModType.UTIL_QOL), ExampleMod.MODID + ".json");
         initialize();
     }

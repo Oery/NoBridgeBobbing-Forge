@@ -1,10 +1,8 @@
 package org.polyfrost.example;
 
-import org.polyfrost.example.command.ExampleCommand;
-import org.polyfrost.example.config.TestConfig;
+import org.polyfrost.example.config.NBBConfig;
 import cc.polyfrost.oneconfig.events.event.InitializationEvent;
 import net.minecraftforge.fml.common.Mod;
-import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 /**
@@ -13,20 +11,19 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
  * @see Mod
  * @see InitializationEvent
  */
-@Mod(modid = ExampleMod.MODID, name = ExampleMod.NAME, version = ExampleMod.VERSION)
-public class ExampleMod {
+@Mod(modid = NoBridgeBobbing.MODID, name = NoBridgeBobbing.NAME, version = NoBridgeBobbing.VERSION)
+public class NoBridgeBobbing {
     public static final String MODID = "@ID@";
     public static final String NAME = "@NAME@";
     public static final String VERSION = "@VER@";
     // Sets the variables from `gradle.properties`. See the `blossom` config in `build.gradle.kts`.
     @Mod.Instance(MODID)
-    public static ExampleMod INSTANCE; // Adds the instance of the mod, so we can access other variables.
-    public static TestConfig config;
+    public static NoBridgeBobbing INSTANCE; // Adds the instance of the mod, so we can access other variables.
+    public static NBBConfig config;
 
     // Register the config and commands.
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
-        config = new TestConfig();
-        CommandManager.INSTANCE.registerCommand(new ExampleCommand());
+        config = new NBBConfig();
     }
 }
